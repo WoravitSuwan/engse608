@@ -1,40 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:lab11/services/notification_service.dart';
-import 'package:lab11/ui/state/category_provider.dart';
-import 'package:lab11/ui/state/event_provider.dart';
-import 'package:lab11/ui/screens/home_screen.dart';
+import 'ui/home_page.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-
-  // Initialize Local Notifications
-  await NotificationService().init();
-
-  runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => CategoryProvider()),
-        ChangeNotifierProvider(create: (_) => EventProvider()),
-      ],
-      child: const EventReminderApp(),
-    ),
-  );
+void main() {
+  runApp(const FruitNotesApp());
 }
 
-class EventReminderApp extends StatelessWidget {
-  const EventReminderApp({Key? key}) : super(key: key);
+class FruitNotesApp extends StatelessWidget {
+  const FruitNotesApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Event & Reminder',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
-        useMaterial3: true,
-      ),
-      home: const HomeScreen(),
       debugShowCheckedModeBanner: false,
+      title: "Fruit Notes 🍓",
+
+      theme: ThemeData(
+        scaffoldBackgroundColor: const Color(0xFFFFF3E8),
+
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Color(0xFFFF6B6B),
+          centerTitle: true,
+        ),
+
+        floatingActionButtonTheme:
+            const FloatingActionButtonThemeData(
+          backgroundColor: Color(0xFFFF6B6B),
+        ),
+      ),
+
+      home: const HomePage(),
     );
   }
 }
